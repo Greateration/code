@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>login page</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/assets.css">
+    <link rel="stylesheet" href="css/verify.css">
+    <script src="js/myjQuery.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/verify.js"></script>
+
+</head>
+
+<body>
+    <!-- 登录页头部 -->
+    <div class="header">
+        <div class="head-box container">
+            <div class="head-title">
+                <a href="#">妮蔻商城</a>
+            </div>
+            <div class="head-logo">
+
+            </div>
+        </div>
+    </div>
+    <!-- 登录页登陆区 -->
+    <div class="wrap">
+        <div class="wrap-box container cf">
+            <div class="login-box">
+                <div class="login-title">
+                    <span>账户登录</span>
+                </div>
+                <div class="login-form">
+                    <input type="text" class="uname form-control" placeholder="手机号/用户名/邮箱"><i class="icon-name"></i>
+                    <span></span>
+                    <input type="password" class="upass form-control" placeholder="密码"><i class="icon-pwd"></i>
+                    <span></span>
+                    <div class="ucheck">
+                        <!-- 验证码 -->
+                        <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+                            点击验证
+                        </button>
+                        <a href="#" class="rt">忘记密码</a>
+                    </div>
+                    <button class="loginbtn">登录</button>
+                    <div class="toregister rt">
+                        <span>还没有账号?</span> <a href="register.html">点击注册</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 登录页底部 -->
+    <div class="footer">
+        <div class="container">
+            <p>
+                Copyright 2008-2020 niko.com，All Rights Reserved ICP证：淦 B5-14283378
+            </p>
+        </div>
+    </div>
+
+    <!-- 验证码模态框 -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">拖动滑块以验证</h4>
+                </div>
+                <div class="modal-body">
+                    <div id="mpanel4" style="margin-top:10px;">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                    <button id="confirm" type="button" class="btn btn-primary">OK</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+    var uname = $(".uname");
+    var upass = $(".upass");
+    var confirm = $("#confirm");
+    //表单聚焦提示方法 传参-->类名和提示文本
+    function tipFocus(cname, tips) {
+        $(cname).next().next().addClass("text_focus");
+        $(cname).next().next().html(tips);
+        $(cname).next().next().toggle();
+    }
+    uname.focus(function () {
+        tipFocus(".uname", "手机号、用户名或者邮箱");
+    });
+    uname.blur(function () {
+        $(this).next().next().hide();
+    });
+    $(".loginbtn").click(function () {
+        $.ajax({
+            type: "post",
+            url: "http://192.168.1.102:3000/users/login",
+            data: {
+                username: uname.val(),
+                password: upass.val()
+            },
+            success: function (data) {
+                var resu = JSON.stringify(data);
+                localStorage.token = resu;
+                console.log(localStorage.token);
+                $.get("http://192.168.1.102:3000/users/userinfo", {
+                    username: uname.val(),
+                    token: JSON.parse(localStorage.token).token
+                }, function (item) {
+                    var username = item.userinfo.username; 
+                    var useremail = item.userinfo.email; 
+                    var userphone = item.userinfo.phone; 
+                    console.log(username,useremail,userphone);
+                    location.href = "index.html?username=" + username + "&email=" + useremail + "&phone=" + userphone;
+                })
+            }
+
+        })
+    })
+    confirm.click(function () {
+
+    })
+</script>
+<script>
+    $(function () {
+        $('#mpanel4').slideVerify({
+            type: 2, //类型
+            vOffset: 5, //误差量，根据需求自行调整
+            vSpace: 5, //间隔
+            imgName: ['checkcode1.jpg', 'checkcode2.jpg'],
+            imgSize: {
+                width: '400px',
+                height: '200px',
+            },
+            blockSize: {
+                width: '40px',
+                height: '40px',
+            },
+            barSize: {
+                width: '400px',
+                height: '40px',
+            },
+            ready: function () {},
+            success: function () {
+                alert('验证成功！');
+                //......后续操作
+            },
+            error: function () {
+                alert('验证失败！');
+            }
+
+        });
+    })
+</script>
+
+</html>

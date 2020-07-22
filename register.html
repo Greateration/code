@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>register page</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/assets.css">
+    <link rel="stylesheet" href="css/reset.css">
+    <script src="js/myjQuery.js"></script>
+</head>
+
+<body>
+    <!-- 注册页头部 -->
+    <div class="header">
+        <div class="head-box container">
+            <div class="head-title">
+                <a href="#">妮蔻商城</a>
+            </div>
+            <div class="head-logo">
+
+            </div>
+        </div>
+    </div>
+    <!-- 注册页注册区 -->
+    <div class="wrap">
+        <div class="wrap-box container cf">
+            <div class="reg-box">
+                <div class="login-title">
+                    <span>账户注册</span>
+                </div>
+                <div class="login-form">
+                    <input type="text" class="uname form-control" placeholder="请输入用户名"><i class="icon-name"></i>
+                    <span class="name-info"></span>
+                    <input type="text" class="uemail form-control" placeholder="请输入邮箱"><i class="icon-mail"></i>
+                    <span class="mail-info"></span>
+                    <input type="text" class="uphone form-control" placeholder="请输入手机号"><i class="icon-phone"></i>
+                    <span class="phone-info"></span>
+                    <input type="password" class="upass form-control" placeholder="请输入密码"><i class="icon-pass"></i>
+                    <span class="pass-info"></span>
+                    <input type="password" class="repass form-control" placeholder="请再次输入确认密码"><i
+                        class="icon-repwd"></i>
+                    <span class="repass-info"></span>
+                    <button class="loginbtn">立即注册</button>
+                    <div class="tologin rt">
+                        <span>已经有账号?</span> <a href="login.html"">点击登录</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 注册页底部 -->
+    <div class=" footer">
+                            <div class="container">
+                                <p>
+                                    Copyright 2008-2020 niko.com，All Rights Reserved ICP证：淦 B5-14283378
+                                </p>
+                            </div>
+                    </div>
+</body>
+<script>
+    $(function () {
+        var uname = $(".uname");
+        var uemail = $(".uemail");
+        var uphone = $(".uphone");
+        var upass = $(".upass");
+        var repass = $(".repass");
+        //表单聚焦提示方法 传参-->类名和提示文本
+        function tipFocus(cname, tips) {
+            $(cname).next().next().removeClass();
+            $(cname).next().next().addClass("text_focus");
+            $(cname).next().next().html(tips);
+        }
+        //表单失焦验证方法
+        function checkUname() {
+            var unamereg = /^\w{4,12}$/;
+            var unamestr = uname.val();
+            if (!unamereg.test(unamestr)) {
+                uname.next().next().addClass("text_error");
+                uname.next().next().html("格式错误");
+                return false;
+            } else {
+                uname.next().next().addClass("text_success");
+                uname.next().next().html("格式正确");
+            }
+            return true;
+        }
+
+        function checkEmail() {
+            var uemailreg = /^\w+@\w+(\.[a-z,A-Z]{2,3}){1,2}$/;
+            var uemailstr = uemail.val();
+            if (!uemailreg.test(uemailstr)) {
+                uemail.next().next().addClass("text_error");
+                uemail.next().next().html("格式错误");
+                return false;
+            } else {
+                uemail.next().next().addClass("text_success");
+                uemail.next().next().html("格式正确");
+            }
+            return true;
+        }
+
+        function checkPhone() {
+            var uphonereg = /^\d{11}$/;
+            var uphonestr = uphone.val();
+            if (!uphonereg.test(uphonestr)) {
+                uphone.next().next().addClass("text_error");
+                uphone.next().next().html("格式错误");
+                return false;
+            } else {
+                uphone.next().next().addClass("text_success");
+                uphone.next().next().html("格式正确");
+            }
+            return true;
+        }
+
+        function checkPass() {
+            var upassreg = /^\w{6,16}$/;
+            var upassstr = upass.val();
+            if (!upassreg.test(upassstr)) {
+                upass.next().next().addClass("text_error");
+                upass.next().next().html("格式错误");
+                return false;
+            } else {
+                upass.next().next().addClass("text_success");
+                upass.next().next().html("格式正确");
+            }
+            return true;
+        }
+
+        function checkRepass() {
+            var upassstr = upass.val();
+            var urepassstr = repass.val();
+            if (urepassstr == upassstr && upassstr != "") {
+                repass.next().next().addClass("text_success");
+                repass.css({
+                    "border": "1px solid green"
+                });
+            } else {
+                repass.next().next().addClass("text_error");
+                repass.css({
+                    "border": "1px solid red"
+                });
+                return false;
+            }
+            return true;
+        }
+
+        function checkAll() {
+            if (checkUname() && checkPass() && checkEmail() && checkRepass() && checkPhone()) {
+                return true;
+            }
+            return false;
+        }
+        //用户名验证
+        uname.focus(function () {
+            tipFocus(".uname", "4-12个字符，可使用字母、数字、下划线");
+        });
+        uname.blur(function () {
+            $(this).next().next().removeClass();
+            checkUname();
+        });
+        //邮箱验证
+        uemail.focus(function () {
+            tipFocus(".uemail", "邮箱格式示例:a1211@163.com");
+        });
+        uemail.blur(function () {
+            $(this).next().next().removeClass();
+            checkEmail();
+        });
+        //密码验证
+        upass.focus(function () {
+            tipFocus(".upass", "6-16个字符，区分大小写");
+        });
+        upass.blur(function () {
+            $(this).next().next().removeClass();
+            checkPass();
+        });
+        //确认密码
+        repass.focus(function () {
+            tipFocus(".repass", "");
+        });
+        repass.blur(function () {
+            $(this).next().next().removeClass();
+            checkRepass();
+        });
+        //手机号验证
+        uphone.focus(function () {
+            tipFocus(".uphone", "11位手机号码");
+        });
+        uphone.blur(function () {
+            $(this).next().next().removeClass();
+            checkPhone();
+        });
+        $(".loginbtn").click(function () {
+            checkAll();
+            if (checkAll()) {
+                $.post("http://192.168.1.102:3000/users/register", {
+                    username: uname.val(),
+                    email: uemail.val(),
+                    phone: uphone.val(),
+                    password: upass.val()
+                }, function (data) {
+                    console.log(data);
+                    alert("恭喜" + uname.val() + "注册成功,3秒后跳转到登录页面");
+                    setTimeout(function () {
+                        location.href = "login.html";
+                    }, 3000);
+                })
+            }
+        })
+    })
+</script>
+
+</html>

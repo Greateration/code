@@ -1,0 +1,262 @@
+.header{
+    width: 100%;
+    border-bottom: 2px solid #FAA8AC;
+}
+.head-box{
+    height: 100px;
+}
+.head-title{
+    float: left;
+}
+.head-title a{
+    font-size: 34px;
+    font-weight: 500;
+    line-height: 100px;
+    font-family: "微软雅黑";
+    color: #E3017E;
+}
+.head-logo{
+    float: right;
+    background-image: url(../img/headright.png);
+    background-position: 0 0;
+    width: 304px;
+    height: 100px;
+}
+.wrap{
+    width: 100%;
+    height: 540px;
+    background-image: url(../img/loginbg.jpg);
+    background-repeat: no-repeat;
+    background-size: 120% 120%;
+    background-position: -200px 0;
+}
+.wrap-box{
+    height: 540px;
+    position: relative;
+}
+.login-box{
+    width: 360px;
+    float: right;
+    background-color: #fff;
+    border-radius: 2px;
+    margin-top: 100px;
+    
+}
+.reg-box{
+    width: 360px;
+    float: right;
+    background-color: #fff;
+    border-radius: 2px;
+    margin-top: 20px;
+}
+.login-title{
+    text-align: center;
+    height: 50px;
+    border-bottom: 1px solid #eaeaea;
+}
+.login-title span{
+    color: #f10180;
+    font-size: 20px;
+    line-height: 50px;
+    font-weight: 600;
+}
+.login-form{
+    padding: 25px 25px;
+    position: relative;
+}
+.uname{
+    height: 45px;
+    text-indent: 25px;
+}
+.text_error {
+    color: red;
+    font-size: small;
+    float: left;
+}
+.text_focus {
+    font-family: "微软雅黑";
+    font-size: small;
+    color: silver;
+    float: left;
+}
+.text_success {
+    color: green;
+    font-size: small;
+    float: left;
+}
+.icon-name{
+    display: block;
+    width: 15px;
+    height: 17px;
+    background-image: url(../img/regiter_uname.jpg);
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    position: absolute;
+    top: 40px;
+    left: 40px;
+}
+.upass{
+    height: 45px;
+    margin-top: 20px;
+    text-indent: 25px;
+}
+.icon-pwd{
+    display: block;
+    width: 14px;
+    height: 17px;
+    background-image: url(../img/register_upass.jpg);
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    position: absolute;
+    top: 105px;
+    left: 40px;
+}
+.repass{
+    height: 45px;
+    margin-top: 20px;
+    text-indent: 25px;
+}
+.icon-pass{
+    display: block;
+    width: 14px;
+    height: 17px;
+    background-image: url(../img/register_upass.jpg);
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    position: absolute;
+    top: 235px;
+    left: 40px;
+}
+.icon-repwd{
+    display: block;
+    width: 14px;
+    height: 17px;
+    background-image: url(../img/register_upass.jpg);
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    position: absolute;
+    top: 300px;
+    left: 40px;
+}
+.uemail{
+    height: 45px;
+    margin-top: 20px;
+    text-indent: 25px;
+}
+.uphone{
+    height: 45px;
+    margin-top: 20px;
+    text-indent: 25px;
+}
+.icon-phone{
+    display: block;
+    width: 12px;
+    height: 18px;
+    background-image: url(../img/register_phone.jpg);
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    position: absolute;
+    top: 168px;
+    left: 40px;
+}
+.icon-mail{
+    display: block;
+    width: 16px;
+    height: 11px;
+    background-image: url(../img/register_uemail.jpg);
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    position: absolute;
+    top: 107px;
+    left: 40px;
+}
+.ucheck{
+    padding: 20px 0;
+}
+.ucheck a{
+    color: #333;
+    font-size: 14px;
+}
+.ucheck a:hover{
+    color: #f10180;
+}
+.ucheck button{
+    background-color: #FAA8AC;
+    width: 140px;
+    height: 45px;
+    border: none;
+    outline: none;
+}
+.ucheck button:hover{
+    background-color: #f10180;
+}
+.loginbtn{
+    width: 100%;
+    height: 45px;
+    background-color: #f10180;
+    border-radius: 4px;
+    color: #fff;
+    font-size: 18px;
+    text-align: center;
+    line-height: 45px;
+    margin-top: 20px;
+}
+.toregister{
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+.toregister a{
+    color: #f10180;
+}
+.tologin{
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+.tologin a{
+    color: #f10180;
+}
+.footer{
+    padding: 20px 0;
+}
+.footer p{
+    text-align: center;
+    color: #666;
+}
+@media screen and (max-width:999px){
+    .wrap{
+        width: 100%;
+        height: 450px;
+        background-image: none;
+        background-color: #FAA8AC;
+    }
+    .login-box{
+        position: absolute;
+        left: 50%;
+        transform: translate(-50%,0);
+    }
+}
+@media screen and (max-width:500px){
+    .wrap{
+        width: 100%;
+        height: 450px;
+        background-image: none;
+        background-color: #FAA8AC;
+        height: 90vh;
+    }
+    .login-box{
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%,-50%);
+    }
+    .head-logo{
+        display: none;
+    }
+    .footer{
+        display: none;
+    }
+    body{
+       height: 100vh;
+       overflow: hidden;
+    }
+}

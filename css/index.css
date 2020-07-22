@@ -1,0 +1,139 @@
+.header{
+    width: 100%;
+    height: 35px;
+    background-color: #eaeaea;
+}
+.welcome{
+    height: 35px;
+    line-height: 35px;
+}
+.welcome a{
+    font-size: 13px;
+    color: #666666;
+}
+.userlogin{
+    height: 35px;
+    line-height: 35px;
+    padding: 0 10px;
+    box-sizing: border-box;
+}
+.userlogin a{
+    font-size: 13px;
+    color: #666666;
+    padding: 0 5px;
+}
+.usercenter{
+    height: 35px;
+    line-height: 35px;
+}
+.usercenter a{
+    font-size: 13px;
+    color: #666666;
+    padding: 0 8px;
+}
+.userlogin a:hover{
+    color: #f10180;
+}
+.usercenter a:hover{
+    color: #f10180;
+}
+.search-box{
+    height: 100px;
+}
+.search-title a{
+    font-size: 34px;
+    font-weight: 500;
+    line-height: 90px;
+    font-family: "微软雅黑";
+    color: #f10180;
+}
+.search-logo{
+    background-image: url(../img/headright.png);
+    background-position: 0 0;
+    width: 304px;
+    height: 100px;
+    margin-left: 50px;
+}
+.search-input{
+    float: right;
+    width: 475px;
+    height: 100px;
+    position: relative;
+}
+.search-input input{
+    display: block;
+    width: 420px;
+    height: 40px;
+    margin-top: 26px;
+    font-family: 微软雅黑;
+    font-size: 14px;
+    position: relative;
+    border-width: 2px;
+    border-style: solid;
+    border-color: #f10180;
+    text-indent: 5px;
+}
+.search-input a{
+    display: block;
+    position: absolute;
+    top: 26px;
+    left: 418px;
+}
+.search-input a i{
+    display: block;
+    width: 50px;
+    height: 40px;
+    background-image: url(../img/search.jpg);
+    background-repeat: no-repeat;
+}
+.listbox{
+    width: 100%;
+    height: 50px;
+    border-bottom: #f10180 2px solid;
+}
+.lists{
+    height: 50px;
+}
+.lists .list-btn{
+    background-color: #f10180;
+    width: 156px;
+    height: auto;
+    margin-right: 20px;
+}
+.lists li{
+    float: left;
+    position: relative;
+    z-index: 8;
+    height: 50px;
+    line-height: 50px;
+}
+.list-btn a{
+    display: block;
+    color: #fff;
+    height: 50px;
+    line-height: 50px;
+    padding: 0 10px;
+    text-align: center;
+    text-indent: 35px;
+    font-size: 16px;
+    white-space: nowrap;
+    position: relative;
+}
+.listall{
+    position: absolute;
+    top: 15px;
+    left: 30px;
+}
+.list-link a{
+    display: block;
+    height: 50px;
+    padding: 0 10px;
+    text-align: center;
+    font-size: 16px;
+    white-space: nowrap;
+    color: #333;
+}
+.linkone a{
+    font-weight: 700;
+    color: #f10180;
+}

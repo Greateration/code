@@ -1,0 +1,15 @@
+用户注册： http://192.168.1.122:3000/users/register   (post)
+	所传参数：
+     	     用户名：username
+                     密码：password
+                     电话：phone
+                     用户id(自己随便写id，不是必填字段):userId
+                     邮箱：email
+用户登录： http://192.168.1.122:3000/users/login (post)
+	所传参数：
+	      用户名：username
+                      密码：password
+获取用户信息：http://192.168.1.122:3000/users/userinfo (get)
+	所传字段：
+  	    用户名：username
+     	    登录的：token
