@@ -133,7 +133,15 @@
     white-space: nowrap;
     color: #333;
 }
+.list-link a:hover{
+    color: #f10180;
+}
 .linkone a{
     font-weight: 700;
     color: #f10180;
+}
+.bgimg{
+    width: 100%;
+    height: 360px;
+    background: url(../img/bgimg.jpg) no-repeat 100%;
 }
