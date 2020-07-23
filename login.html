@@ -41,7 +41,8 @@
                     <span></span>
                     <div class="ucheck">
                         <!-- 验证码 -->
-                        <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+                        <button id="checkcode" type="button" class="btn btn-primary btn-lg" data-toggle="modal"
+                            data-target="#myModal">
                             点击验证
                         </button>
                         <a href="#" class="rt">忘记密码</a>
@@ -78,7 +79,6 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                    <button id="confirm" type="button" class="btn btn-primary">OK</button>
                 </div>
             </div>
         </div>
@@ -101,33 +101,33 @@
         $(this).next().next().hide();
     });
     $(".loginbtn").click(function () {
-        $.ajax({
-            type: "post",
-            url: "http://192.168.1.102:3000/users/login",
-            data: {
-                username: uname.val(),
-                password: upass.val()
-            },
-            success: function (data) {
-                var resu = JSON.stringify(data);
-                localStorage.token = resu;
-                console.log(localStorage.token);
-                $.get("http://192.168.1.102:3000/users/userinfo", {
+        if ($("#checkcode").html() == "验证通过") {
+            $.ajax({
+                type: "post",
+                url: "http://192.168.1.103:3000/users/login",
+                data: {
                     username: uname.val(),
-                    token: JSON.parse(localStorage.token).token
-                }, function (item) {
-                    var username = item.userinfo.username; 
-                    var useremail = item.userinfo.email; 
-                    var userphone = item.userinfo.phone; 
-                    console.log(username,useremail,userphone);
-                    location.href = "index.html?username=" + username + "&email=" + useremail + "&phone=" + userphone;
-                })
-            }
+                    password: upass.val()
+                },
+                success: function (data) {
+                    var resu = JSON.stringify(data);
+                    localStorage.token = resu;
+                    console.log(localStorage.token);
+                    $.get("http://192.168.1.103:3000/users/userinfo", {
+                        username: uname.val(),
+                        token: JSON.parse(localStorage.token).token
+                    }, function (item) {
+                        var username = item.userinfo.username;
+                        var useremail = item.userinfo.email;
+                        var userphone = item.userinfo.phone;
+                        console.log(username, useremail, userphone);
+                        location.href = "index.html?username=" + username + "&email=" +
+                            useremail + "&phone=" + userphone;
+                    })
+                }
 
-        })
-    })
-    confirm.click(function () {
-
+            })
+        }
     })
 </script>
 <script>
@@ -152,7 +152,11 @@
             ready: function () {},
             success: function () {
                 alert('验证成功！');
-                //......后续操作
+                $("#checkcode").html("验证通过").css({
+                    "backgroundColor": "springgreen",
+                    "outline": "none",
+                    "border": "none"
+                });
             },
             error: function () {
                 alert('验证失败！');

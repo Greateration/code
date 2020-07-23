@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>index page</title>
+    <title>classify page</title>
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/index.css">
@@ -14,15 +14,15 @@
 <script>
     $(function () {
         var url = location.search;
+        var userdata = {};
         if (url.indexOf("?") != -1) {
             var str = url.substr(1);
             var arr = str.split("&");
-            var userdata = {};
             arr.forEach(function (item, index) {
                 userdata[item.split("=")[0]] = item.split("=")[1];
             })
         }
-        if (url != null) {
+        if (userdata.username != null) {
             $(".login").html(userdata.username);
             $(".register").hide();
             $(".exit").show();
@@ -32,9 +32,22 @@
                 $("register").show();
                 localStorage.clear(); //清空本地数据
             })
-
         }
-
+        $.ajax({
+            url: "http://localhost/w/website/findGoodsTypeList",
+            success: function (resu) {
+                resu.data.forEach(function (item, index) {
+                    $(".lists").append(
+                        `<li class="list-link"><a href="#">${item.name}</a></li>`);
+                })
+                // 点击某分类 分类页显示该分类点亮
+                for (i = 0; i < $(".list-link a").length; i++) {
+                    if ($(".list-link a")[i].innerText == decodeURIComponent(userdata.shopname)) {
+                        $(".list-link a")[i].style.color = "#f10180";
+                    }
+                }
+            }
+        })
     })
 </script>
 
@@ -124,21 +137,9 @@
                 </div>
             </div>
         </div>
-        <div class="part container">
-            <div class="part1-title">
-                <img src="img/part.jpg">
-            </div>
-            <div class="part1-shops row" id="shops">
-                
-            </div>
-        </div>
     </div>
     <div class="footer">
-        <div class="container">
-            <p>
-                Copyright 2008-2020 niko.com，All Rights Reserved ICP证：淦 B5-14283378
-            </p>
-        </div>
+        <div class="container"></div>
     </div>
 </body>
 <script>
@@ -150,20 +151,6 @@
                     $(".carousel-inner").append(
                         `<div class="item"><img src="${item.img}"></div>`);
                     $($(".carousel-inner").children()[0]).addClass("active");
-                })
-            }
-        })
-        $.ajax({
-            url: "http://localhost/w/website/findGoodsTypeList",
-            success: function (resu) {
-                resu.data.forEach(function (item, index) {
-                    $(".lists").append(
-                        `<li class="list-link"><a href="#">${item.name}</a></li>`);
-                })
-                $(".lists a").click(function () {
-                    console.log(1);
-                    location.href = "classify.html?shopname=" + encodeURIComponent($(this)
-                        .text()) + "&username=" + encodeURIComponent($(".login").text());
                 })
             }
         })
@@ -185,22 +172,6 @@
                 "color": "#fff"
             });
         })
-        $.ajax({
-            url: "http://localhost/w/website/findGoodsList",
-            data:{
-                info:"女装",
-                platId:"d0a500ecf8ab41aa9ffe8e18ac6419e1",
-                pageNo:1
-            },
-            success: function (resu) {
-                var arr = resu.data.tbk_dg_material_optional_response.result_list.map_data;
-                arr.forEach(function (item, index) {
-                    $("#shops").append(
-                        `<div class="shop col-md-6"><a href="#"><img src="${item.pict_url}"><div class="shopinfo"><span class="shop-title">${item.short_title}</span><div class="otherinfo"><span class="shop-price">现价：${item.reserve_price}元</span><span class="count-info">${item.coupon_info}</span></div></div></a></div>`);
-                })
-            }
-        })
-
     })
 </script>
 

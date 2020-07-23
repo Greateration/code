@@ -124,6 +124,25 @@
     top: 15px;
     left: 30px;
 }
+.hiddenlist{
+    display: none;
+    width: 156px;
+    background-color: #f10180;
+    position: absolute;
+    top: 50px;
+    left: 0;
+}
+.hiddenlist a{
+    display: block;
+    height: 45px;
+    line-height: 45px;
+    text-align: center;
+    text-indent: 0;
+    font-size: 14px;
+    white-space: nowrap;
+    color: #fff;
+    box-sizing: border-box;
+}
 .list-link a{
     display: block;
     height: 50px;
@@ -137,6 +156,8 @@
     color: #f10180;
 }
 .linkone a{
+    user-select: none;
+    pointer-events: none;
     font-weight: 700;
     color: #f10180;
 }
@@ -144,4 +165,113 @@
     width: 100%;
     height: 360px;
     background: url(../img/bgimg.jpg) no-repeat 100%;
+}
+.carousel{
+    width: 100%;
+    height: 360px;
+}
+.carousel-inner{
+    height: 360px;
+}
+.carousel-inner img{
+    display: block;
+    width: 100%;
+    height: 360px !important;
+}
+.part1-title{
+    margin-top: 50px;
+    height: 70px;
+}
+.part img{
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+.shop{
+    margin: 20px 0;
+    background-color: #fff;
+}
+.shop:hover{
+    border: 1px silver solid;
+}
+.shop a{
+    width: 490px;
+    height: 490px;
+}
+.shop a img{
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+.shop-title{
+    margin-top: 18px;
+    cursor: pointer;
+    font-family: MicrosoftYaHei;
+    font-weight: 700;
+    font-size: 18px;
+    color: #333;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 455px;
+    display: block;
+}
+.otherinfo{
+    margin-top: 10px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.shop-price{
+    display: block;
+    font-weight: 500;
+    font-size: 16px;
+    color: #f10180;
+    padding:5px 0;
+}
+.count-info{
+    display: block;
+    font-weight: 500;
+    font-size: 16px;
+    color: red;
+    text-decoration: line-through;
+}
+.footer{
+    padding: 20px 0;
+}
+.footer p{
+    text-align: center;
+    color: #666;
+}
+@media screen and (max-width:768px){
+    .search-title{
+        display: none;
+    }
+    .search-box{
+        position: relative;
+    }
+    .search-input{
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%,-50%);
+    }
+}
+@media screen and (max-width:520px){
+    .search-input{
+       width: 400px;
+    }
+    .search-input input{
+        width: 360px;
+    }
+    .search-input a{
+        position: absolute;
+        left: 358px;
+    }
+    .usercenter{
+        display: none;
+    }
+    .footer{
+        display: none;
+    }
 }
