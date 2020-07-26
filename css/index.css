@@ -162,6 +162,7 @@
     color: #f10180;
 }
 .bgimg{
+    cursor: pointer;
     width: 100%;
     height: 360px;
     background: url(../img/bgimg.jpg) no-repeat 100%;
@@ -257,7 +258,12 @@
         transform: translate(-50%,-50%);
     }
 }
-@media screen and (max-width:520px){
+@media screen and (max-width:1170px){
+    .lists li:nth-of-type(2n){
+        display: none;
+    }
+}
+@media screen and (max-width:580px){
     .search-input{
        width: 400px;
     }
@@ -274,4 +280,224 @@
     .footer{
         display: none;
     }
+    .listbox{
+        display: none;
+    }
+    .bgimg{
+        display: none;
+    }
+    
+}
+.classify-title{
+    width: 100%;
+    height: 50px;
+    background-color: #eaeaea;
+    text-align: center;
+    margin-top: 30px;
+}
+.classify-title span{
+    display: inline-block;
+    color: #333;
+    font-size: 30px;
+    line-height: 50px;
+}
+.goods_details{
+   margin-top: 20px;
+}
+.theshop {
+    width: 440px;
+    float: left;
+    margin-bottom: 40px;
+    position: relative;
+}
+.theshop a {
+    display: block;
+    margin: 0 20px 10px 0;
+}
+.shopimg {
+    position: relative;
+    width: 418px;
+    height: 418px;
+}
+.shopimg img{
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+.anchor{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 200px;
+    height: 200px;
+    background-color: rgba(0, 0, 0, .2);
+    cursor: move;
+    opacity: 0;
+}
+.bigbox{
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 420px;
+    width: 500px;
+    height: 500px;
+    overflow: hidden;
+}
+.bigbox img{
+    width: 1000px;
+    height: 1000px;
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+.selectone {
+    float: left;
+    width: 88px;
+    height: 88px;
+}
+.selectone img{
+    display: block;
+    width: 88px;
+    height: 88px;
+}
+.details {
+    float: left;
+}
+.shopdesc {
+    margin: 0 10px;
+}
+.shopdesc h4 {
+    font-size: 18px;
+    font-weight: 700;
+    color: #f10180;
+    font-family: "微软雅黑";
+    margin: 10px 0;
+}
+.shopdesc label {
+    height: 50px;
+    line-height: 50px;
+    font-size: 16px;
+    color: #666;
+    font-family: "微软雅黑";
+}
+.shopdesc span {
+    font-size: 16px;
+    color: #232323;
+    font-weight: 600;
+    font-family: "微软雅黑";
+
+}
+small{
+    font-size: 14px;
+}
+.add{
+    cursor: pointer;
+    color: #fff;
+    background-color: #f10180 !important;
+}
+.reduce{
+    cursor: pointer;
+    color: #fff;
+    background-color: #f10180 !important;
+}
+.add:hover{
+    color: #fff;
+}
+.reduce:hover{
+    color: #fff;
+}
+.shopdetail {
+    margin: 30px 10px;
+    line-height: 50px;
+}
+.shopdetail div {
+    float: left;
+    width: 105px;
+    text-align: justify;
+    
+}
+.shopdetail div>span {
+    display: inline-block;
+    padding-left: 100%;
+}
+.shopdetail span {
+    float: left;
+    font-size: 14px;
+    color: #666;
+    font-family: "微软雅黑";
+}
+.shopdetail label {
+    font-size: 20px;
+    color: #f10180;
+    font-family: "微软雅黑";
+}
+.shopdetail_btn {
+    width: 100px;
+    height: 35px;
+    margin-top: 10px;
+}
+.shopdetail_btn button {
+    display: block;
+    float: left;
+    width: 28px;
+    height: 32px;
+    line-height: 32px;
+    text-align: center;
+    border: 1px solid #dddddd;
+    background-color: #f0f0f0;
+}
+.shopdetail_btn input {
+    float: left;
+    width: 40px;
+    height: 32px;
+    line-height: 32px;
+    border-top: 1px solid #dddddd;
+    border-bottom: 1px solid #dddddd;
+    border-left: none;
+    border-right: none;
+    text-align: center;
+}
+.buy {
+    display: block;
+    float: left;
+    width: 135px;
+    height: 40px;
+    line-height: 40px;
+    font-size: 14px;
+    color: #fff;
+    font-family: "微软雅黑";
+    background-color: #f10180;
+    border: 1px solid #f10180;
+    border-radius: 1px;
+    text-align: center;
+}
+.buy:hover{
+    color: #f10180;
+    background-color: #fff;
+}
+.addcart {
+    display: block;
+    float: left;
+    width: 135px;
+    height: 40px;
+    line-height: 40px;
+    font-size: 14px;
+    color: #666;
+    font-family: "微软雅黑";
+    border: 1px solid #dddddd;
+    border-radius: 1px;
+    text-align: center;
+    margin-left: 40px;
+}
+.addcart:hover{
+    color: #fff;
+    background-color: #f10180;
+}
+.footer{
+    border-top: 2px solid #a1a1a1;
+}
+nav{
+    cursor: pointer;
+    margin-left: 50%;
+    transform: translate(-50%,0);
 }

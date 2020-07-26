@@ -11,45 +11,6 @@
     <script src="js/myjQuery.js"></script>
     <script src="js/bootstrap.min.js"></script>
 </head>
-<script>
-    $(function () {
-        var url = location.search;
-        var userdata = {};
-        if (url.indexOf("?") != -1) {
-            var str = url.substr(1);
-            var arr = str.split("&");
-            arr.forEach(function (item, index) {
-                userdata[item.split("=")[0]] = item.split("=")[1];
-            })
-        }
-        if (userdata.username != null) {
-            $(".login").html(userdata.username);
-            $(".register").hide();
-            $(".exit").show();
-            $(".exit").click(function () {
-                $(this).hide();
-                $(".login").html("请登录");
-                $("register").show();
-                localStorage.clear(); //清空本地数据
-            })
-        }
-        $.ajax({
-            url: "http://localhost/w/website/findGoodsTypeList",
-            success: function (resu) {
-                resu.data.forEach(function (item, index) {
-                    $(".lists").append(
-                        `<li class="list-link"><a href="#">${item.name}</a></li>`);
-                })
-                // 点击某分类 分类页显示该分类点亮
-                for (i = 0; i < $(".list-link a").length; i++) {
-                    if ($(".list-link a")[i].innerText == decodeURIComponent(userdata.shopname)) {
-                        $(".list-link a")[i].style.color = "#f10180";
-                    }
-                }
-            }
-        })
-    })
-</script>
 
 <body>
     <div class="header">
@@ -73,7 +34,7 @@
     <div class="wrap">
         <div class="search-box container">
             <div class="search-title lf">
-                <a href="#">妮蔻商城</a>
+                <a href="index.html">妮蔻商城</a>
             </div>
             <div class="search-logo lf visible-lg">
             </div>
@@ -102,7 +63,7 @@
                         </div>
                     </li>
                     <li class="list-link linkone">
-                        <a href="#">首页</a>
+                        <a href="index.html">首页</a>
                     </li>
                 </ul>
             </div>
@@ -138,12 +99,142 @@
             </div>
         </div>
     </div>
+    <div class="classify-title">
+        <span>---</span><span class="goodsname"></span><span>专区---</span>
+    </div>
+    <div class="part container">
+        <div class="part1-shops row" id="shops">
+
+        </div>
+    </div>
+    <nav aria-label="Page navigation">
+        <ul class="pagination pagination-lg">
+            <li class="disabled">
+                <span>
+                    <span aria-hidden="true">&laquo;</span>
+                </span>
+            </li>
+            <li class="active"><span class="pagenum">1<span class="sr-only"></span></span></li>
+            <li><span class="pagenum">2</span></li>
+            <li><span class="pagenum">3</span></li>
+            <li><span class="pagenum">4</span></li>
+            <li><span class="pagenum">5</span></li>
+            <li><span class="pagenum">6</span></li>
+            <li><span class="pagenum">7</span></li>
+            <li><span class="pagenum">8</span></li>
+            <li><span class="pagenum">9</span></li>
+            <li><span class="pagenum">10</span></li>
+            <li><span class="pagenum">11</span></li>
+            <li><span>...</span></li>
+            <li>
+                <span>
+                    <span aria-hidden="true">&raquo;</span>
+                </span>
+            </li>
+        </ul>
+    </nav>
     <div class="footer">
-        <div class="container"></div>
+        <div class="container">
+            <p>
+                Copyright 2008-2020 niko.com，All Rights Reserved ICP证：淦 B5-14283378
+            </p>
+        </div>
     </div>
 </body>
 <script>
     $(function () {
+        var url = location.search;
+        var userdata = {};
+        if (url.indexOf("?") != -1) {
+            var str = url.substr(1);
+            var arr = str.split("&");
+            arr.forEach(function (item, index) {
+                userdata[item.split("=")[0]] = item.split("=")[1];
+            })
+        }
+        console.log(userdata);
+        if (localStorage.token) {
+            $(".login").html(userdata.username);
+            $(".register").hide();
+            $(".exit").show();
+            $(".exit").click(function () {
+                $(this).hide();
+                $(".login").html("请登录");
+                $(".register").show();
+                localStorage.clear(); //清空本地数据
+            })
+        }
+        $.ajax({
+            url: "http://localhost/w/website/findGoodsTypeList",
+            success: function (resu) {
+                resu.data.forEach(function (item, index) {
+                    $(".lists").append(
+                        `<li class="list-link"><a href="#">${item.name}</a></li>`);
+                })
+                $(".lists a").click(function () {
+                    if (userdata.username) {
+                        location.href = "classify.html?shopname=" + encodeURIComponent($(
+                                this)
+                            .text()) + "&username=" + encodeURIComponent(userdata
+                            .username);
+                    } else {
+                        location.href = "classify.html?shopname=" + encodeURIComponent($(
+                                this)
+                            .text());
+                    }
+
+                })
+                // 点击某分类 分类页显示该分类点亮
+                for (i = 0; i < $(".list-link a").length; i++) {
+                    if ($(".list-link a")[i].innerText == decodeURIComponent(userdata.shopname)) {
+                        $(".list-link a")[i].style.color = "#f10180";
+                    }
+                }
+                //点击某分类 分类页显示该分类的标题
+                $(".goodsname").html(decodeURIComponent(userdata.shopname));
+            }
+        })
+        // 分页功能
+        var pagenum = 1; //默认加载第一页
+        $(".pagenum").click(function () {
+            $(".pagenum").parent("li").removeClass("active");
+            $(this).parent("li").addClass("active")
+            pagenum = $(this).text(); //拿到页码
+            $("#shops").empty();
+            getShop();
+        })
+        getShop();
+        //获取商品的函数
+        function getShop() {
+            $.ajax({
+                url: "http://localhost/w/website/findGoodsList",
+                data: {
+                    info: decodeURIComponent(userdata.shopname),
+                    platId: "d0a500ecf8ab41aa9ffe8e18ac6419e1",
+                    pageNo: pagenum
+                },
+                success: function (resu) {
+                    var arr = resu.data.tbk_dg_material_optional_response.result_list.map_data;
+                    arr.forEach(function (item, index) {
+                        $("#shops").append(
+                            `<div class="shop col-md-4"><a href="#"><img src="${item.pict_url}"><div class="shopinfo"><span class="shop-title">${item.short_title}</span><div class="otherinfo"><span class="shop-price">现价：${item.reserve_price}元</span><span class="count-info">${item.coupon_info}</span></div></div></a></div>`
+                        );
+                        //商品点击跳转商品详情页 携带id
+                        $(".shop").click(function () {
+                            if (userdata.username) {
+                                location.href = "shopinfo.html?id=" + item.item_id +
+                                    "&username=" + encodeURIComponent(userdata
+                                        .username);
+                            } else {
+                                location.href = "shopinfo.html?id=" + item.item_id;
+                            }
+
+                        })
+                    })
+
+                }
+            })
+        }
         $.ajax({
             url: "http://localhost/w/website/bannerList",
             success: function (resu) {

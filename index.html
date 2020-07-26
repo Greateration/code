@@ -11,32 +11,6 @@
     <script src="js/myjQuery.js"></script>
     <script src="js/bootstrap.min.js"></script>
 </head>
-<script>
-    $(function () {
-        var url = location.search;
-        if (url.indexOf("?") != -1) {
-            var str = url.substr(1);
-            var arr = str.split("&");
-            var userdata = {};
-            arr.forEach(function (item, index) {
-                userdata[item.split("=")[0]] = item.split("=")[1];
-            })
-        }
-        if (url != null) {
-            $(".login").html(userdata.username);
-            $(".register").hide();
-            $(".exit").show();
-            $(".exit").click(function () {
-                $(this).hide();
-                $(".login").html("请登录");
-                $("register").show();
-                localStorage.clear(); //清空本地数据
-            })
-
-        }
-
-    })
-</script>
 
 <body>
     <div class="header">
@@ -60,7 +34,7 @@
     <div class="wrap">
         <div class="search-box container">
             <div class="search-title lf">
-                <a href="#">妮蔻商城</a>
+                <a href="index.html">妮蔻商城</a>
             </div>
             <div class="search-logo lf visible-lg">
             </div>
@@ -129,7 +103,7 @@
                 <img src="img/part.jpg">
             </div>
             <div class="part1-shops row" id="shops">
-                
+
             </div>
         </div>
     </div>
@@ -143,6 +117,25 @@
 </body>
 <script>
     $(function () {
+        var url = location.search;
+        var userdata = {};
+        if (url.indexOf("?") != -1) {
+            var str = url.substr(1);
+            var arr = str.split("&");
+            arr.forEach(function (item, index) {
+                userdata[item.split("=")[0]] = item.split("=")[1];
+            })
+        }
+        if (url && JSON.parse(localStorage.token).token) {
+            $(".login").html(userdata.username);
+            $(".register").hide();
+            $(".exit").show();
+            $(".exit").click(function () {
+                $(this).hide();
+                $(".login").html("请登录");
+                $(".register").show();
+            })
+        }
         $.ajax({
             url: "http://localhost/w/website/bannerList",
             success: function (resu) {
@@ -161,9 +154,17 @@
                         `<li class="list-link"><a href="#">${item.name}</a></li>`);
                 })
                 $(".lists a").click(function () {
-                    console.log(1);
-                    location.href = "classify.html?shopname=" + encodeURIComponent($(this)
-                        .text()) + "&username=" + encodeURIComponent($(".login").text());
+                    if (userdata.username) {
+                        location.href = "classify.html?shopname=" + encodeURIComponent($(
+                                this)
+                            .text()) + "&username=" + encodeURIComponent(userdata
+                            .username);
+                    } else {
+                        location.href = "classify.html?shopname=" + encodeURIComponent($(
+                                this)
+                            .text());
+                    }
+
                 })
             }
         })
@@ -187,16 +188,17 @@
         })
         $.ajax({
             url: "http://localhost/w/website/findGoodsList",
-            data:{
-                info:"女装",
-                platId:"d0a500ecf8ab41aa9ffe8e18ac6419e1",
-                pageNo:1
+            data: {
+                info: "女装",
+                platId: "d0a500ecf8ab41aa9ffe8e18ac6419e1",
+                pageNo: 1
             },
             success: function (resu) {
                 var arr = resu.data.tbk_dg_material_optional_response.result_list.map_data;
                 arr.forEach(function (item, index) {
                     $("#shops").append(
-                        `<div class="shop col-md-6"><a href="#"><img src="${item.pict_url}"><div class="shopinfo"><span class="shop-title">${item.short_title}</span><div class="otherinfo"><span class="shop-price">现价：${item.reserve_price}元</span><span class="count-info">${item.coupon_info}</span></div></div></a></div>`);
+                        `<div class="shop col-md-3"><a href="#"><img src="${item.pict_url}"><div class="shopinfo"><span class="shop-title">${item.short_title}</span><div class="otherinfo"><span class="shop-price">现价：${item.reserve_price}元</span><span class="count-info">${item.coupon_info}</span></div></div></a></div>`
+                    );
                 })
             }
         })

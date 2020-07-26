@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>shopinfo page</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/index.css">
+    <script src="js/myjQuery.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+</head>
+
+<body>
+    <div class="header">
+        <div class="container">
+            <div class="welcome lf">
+                <a href="index.html">欢迎来到妮蔻商城！</a>
+            </div>
+            <div class="userlogin lf">
+                <a href="login.html" class="login">请登录</a>
+                <a href="register.html" class="register">免费注册</a>
+                <a href="#" class="exit" style="display: none;">退出登录</a>
+            </div>
+            <div class="usercenter rt">
+                <a href="#">我的妮蔻</a>
+                <a href="#">购物车</a>
+                <a href="#">收藏</a>
+                <a href="#">帮助中心</a>
+            </div>
+        </div>
+    </div>
+    <div class="wrap">
+        <div class="search-box container">
+            <div class="search-title lf">
+                <a href="index.html">妮蔻商城</a>
+            </div>
+            <div class="search-logo lf visible-lg">
+            </div>
+            <div class="search-input">
+                <input type="text" placeholder="请输入关键字">
+                <a href="#"><i></i></a>
+            </div>
+        </div>
+        <div class="listbox">
+            <div class="container">
+                <ul class="lists">
+                    <li class="list-btn">
+                        <a href="#">
+                            <img src="img/nav.png" class="listall"> 商品分类
+                        </a>
+                        <div class="hiddenlist">
+                            <a href="#">抢购/促销/特卖</a>
+                            <a href="#">男装/男士/商务</a>
+                            <a href="#">女装/时尚/化妆品</a>
+                            <a href="#">奢侈品/数码</a>
+                            <a href="#">生活用品/居家常用</a>
+                            <a href="#">运动/装备</a>
+                            <a href="#">休闲娱乐</a>
+                            <a href="#">家用电器</a>
+                            <a href="#">户外健身</a>
+                        </div>
+                    </li>
+                    <li class="list-link linkone">
+                        <a href="index.html">首页</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="goods_details container">
+
+        </div>
+    </div>
+    <div class="footer">
+        <div class="container">
+            <p>
+                Copyright 2008-2020 niko.com，All Rights Reserved ICP证：淦 B5-14283378
+            </p>
+        </div>
+    </div>
+</body>
+<script>
+    $(function () {
+        var url = location.search;
+        var userdata = {};
+        if (url.indexOf("?") != -1) {
+            var str = url.substr(1);
+            var arr = str.split("&");
+            arr.forEach(function (item, index) {
+                userdata[item.split("=")[0]] = item.split("=")[1];
+            })
+        }
+        if (localStorage.token) {
+            $(".login").html(userdata.username);
+            $(".register").hide();
+            $(".exit").show();
+            $(".exit").click(function () {
+                $(this).hide();
+                $(".login").html("请登录");
+                $(".register").show();
+                localStorage.clear(); //清空本地数据
+            })
+        }
+        $.ajax({
+            url: "http://localhost/w/website/findGoodsTypeList",
+            success: function (resu) {
+                resu.data.forEach(function (item, index) {
+                    $(".lists").append(
+                        `<li class="list-link"><a href="#">${item.name}</a></li>`);
+                })
+                $(".lists a").click(function () {
+                    if (userdata.username) {
+                        location.href = "classify.html?shopname=" + encodeURIComponent($(
+                                this)
+                            .text()) + "&username=" + encodeURIComponent(userdata
+                            .username);
+                    } else {
+                        location.href = "classify.html?shopname=" + encodeURIComponent($(
+                                this)
+                            .text());
+                    }
+
+                })
+                // 点击某分类 分类页显示该分类点亮
+                for (i = 0; i < $(".list-link a").length; i++) {
+                    if ($(".list-link a")[i].innerText == decodeURIComponent(userdata.shopname)) {
+                        $(".list-link a")[i].style.color = "#f10180";
+                    }
+                }
+                //点击某分类 分类页显示该分类的标题
+                $(".goodsname").html(decodeURIComponent(userdata.shopname));
+            }
+
+        })
+        $.ajax({
+            url: "http://localhost/w/website/findGoodsDetail?info=" + userdata.id,
+            success: function (resu) {
+                var arr = resu.data.detail.tbk_item_info_get_response.results.n_tbk_item;
+                $(".goods_details").append(`<div class="theshop cf">
+                    <a href="#" class="shopimg"><img src="${arr[0].small_images.string[0]}">
+                        <div class="anchor"></div>
+                    </a>
+                    <div class="bigbox">
+                        <img src="${arr[0].small_images.string[0]}">
+                    </div>
+                    <div class="checkone">
+                        <a class="selectone"><img src="${arr[0].small_images.string[0]}"></a>
+                        <a class="selectone"><img src="${arr[0].small_images.string[1]}"></a>
+                        <a class="selectone"><img src="${arr[0].small_images.string[2]}"></a>
+                        <a class="selectone"><img src="${arr[0].small_images.string[3]}"></a>
+                    </div>
+                </div>
+                <div class="details cf">
+                    <div class="shopdesc">
+                        <h4 class="shop_title">${arr[0].title}</h4>
+                        <label><span>产品名称：</span><small>${arr[0].cat_leaf_name}</small></label><br>
+                        <label><span>产地：</span><small>${arr[0].provcity}</small></label><br>
+                        <label><span>品类：</span><small>${arr[0].cat_name}</small></label><br>
+                        <label><span>店铺：</span><small>${arr[0].nick}</small></label><br>
+                        <br>
+                    </div>
+                    <div class="shopdetail cf">
+                        <div>原价：<span></span></div>
+                        <span class="price">￥${arr[0].reserve_price}</span>
+                        <br>
+                        <div>折后价：<span></span></div>
+                        <label class="dzprice">￥${arr[0].zk_final_price}</label>
+                        <br>
+                        <div>购买数量：<span></span></div>
+                        <div class="shopdetail_btn">
+                            <button class="reduce">-</button>
+                            <input type="text" value="1">
+                            <button class="add">+</button>
+                        </div>
+                    </div>
+                    <a href="#" class="buy">立即购买</a>
+                    <a href="#" class="addcart">加入购物车</a>
+                </div>`);
+                $(".selectone img").mouseenter(function () {
+                    $(this).css("border", "1px solid #f10180");
+                })
+                $(".selectone img").mouseleave(function () {
+                    $(this).css("border", "none");
+                })
+                $(".selectone").click(function () {
+                    var index = $(this).index();
+                    $(".shopimg img").remove();
+                    $(".shopimg").append(
+                        `<img src="${arr[0].small_images.string[index]}">`);
+                    $(".bigbox img").remove();
+                    $(".bigbox").append(
+                        `<img src="${arr[0].small_images.string[index]}">`);
+
+                })
+                // 放大镜
+                var largelook = new MakeLarger();
+                $(".add").click(function(){
+                    var num = $(this).prev().val();
+                    num++;
+                    $(this).prev().val(num);
+                    var str = $(".dzprice").text().substr(1);
+                    var resa = (parseFloat(str) + parseFloat(arr[0].zk_final_price)).toFixed(2);
+                    $(".dzprice").text("￥" + resa);
+                })
+                $(".reduce").click(function(){
+                    var num2 = $(this).next().val();
+                    num2--;
+                    if(num2 == 0){
+                        $(this).prop("disabled",true)
+                    }
+                    $(this).next().val(num2);
+                    var str2 = $(".dzprice").text().substr(1);
+                    var resd = (parseFloat(str2) - parseFloat(arr[0].zk_final_price)).toFixed(2);
+                    $(".dzprice").text("￥" + resd);
+                })
+            }
+
+        })
+        $(".list-btn").mouseenter(function () {
+            $(".hiddenlist").stop().fadeIn();
+        })
+        $(".list-btn").mouseleave(function () {
+            $(".hiddenlist").stop().fadeOut();
+        })
+        $(".hiddenlist").children().mouseenter(function () {
+            $(this).css({
+                "backgroundColor": "#fff",
+                "color": "#f10180"
+            });
+        })
+        $(".hiddenlist").children().mouseleave(function () {
+            $(this).css({
+                "backgroundColor": "#f10180",
+                "color": "#fff"
+            });
+        })
+    })
+    //放大镜构造方法
+    function MakeLarger() {
+        //获取属性
+        this.small = document.querySelector(".shopimg"); /*小盒子*/
+        this.anchor = document.querySelector(".anchor"); /*移动锚点*/
+        this.large = document.querySelector(".bigbox"); /*大盒子*/
+        this.largeimg = document.querySelector(".bigbox > img"); /*放大镜图片*/
+        this.maxX = this.small.offsetWidth - this.anchor.offsetWidth; /*所能移动的水平极值*/
+        this.maxY = this.small.offsetHeight - this.anchor.offsetHeight; /*所能移动的水平极值*/
+        var _this = this; //this指向赋给变量
+        //小盒子添加鼠标事件方法
+        this.smallMouse = function () {
+            //鼠标移入触发
+            _this.small.onmouseenter = function () {
+                _this.large.style.display = "block";
+                _this.anchor.style.display = "block";
+                _this.anchor.style.opacity = 0.7;
+            }
+            //鼠标移出触发
+            _this.small.onmouseleave = function () {
+                _this.large.style.display = "none";
+                _this.anchor.style.display = "none";
+            }
+            //鼠标移动触发
+            _this.small.onmousemove = function (e) {
+                e = e || window.event; //兼容IE
+                /*水平移动距离*/
+                var left = e.clientX - _this.small.parentElement.offsetLeft - _this.anchor.offsetWidth / 2;
+                left = left < 0 ? 0 : left;
+                left = left > _this.maxX ? _this.maxX : left;
+                _this.anchor.style.left = left + "px";
+                /*垂直移动距离*/
+                var top = e.clientY - _this.small.offsetTop - _this.anchor.offsetHeight / 2;
+                top = top < 0 ? 0 : top;
+                top = top > _this.maxY ? _this.maxY : top;
+                _this.anchor.style.top = top + "px";
+                /*水平比例*/
+                var percentX = left / _this.maxX;
+                /*垂直比例*/
+                var percentY = top / _this.maxY;
+                /*大图移动距离*/
+                var bigLeft = (_this.largeimg.offsetWidth - _this.large.offsetWidth) * percentX;
+                var bigTop = (_this.largeimg.offsetHeight - _this.large.offsetHeight) * percentY;
+                _this.largeimg.style.left = -bigLeft + "px";
+                _this.largeimg.style.top = -bigTop + "px";
+            }
+        }
+        this.smallMouse(); //调用鼠标事件方法
+    }
+</script>
+
+</html>
