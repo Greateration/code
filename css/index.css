@@ -1,66 +1,79 @@
-.header{
+.header {
     width: 100%;
     height: 35px;
     background-color: #eaeaea;
 }
-.welcome{
+
+.welcome {
     height: 35px;
     line-height: 35px;
 }
-.welcome a{
+
+.welcome a {
     font-size: 13px;
     color: #666666;
 }
-.userlogin{
+
+.userlogin {
     height: 35px;
     line-height: 35px;
     padding: 0 10px;
     box-sizing: border-box;
 }
-.userlogin a{
+
+.userlogin a {
     font-size: 13px;
     color: #666666;
     padding: 0 5px;
 }
-.usercenter{
+
+.usercenter {
     height: 35px;
     line-height: 35px;
 }
-.usercenter a{
+
+.usercenter a {
     font-size: 13px;
     color: #666666;
     padding: 0 8px;
 }
-.userlogin a:hover{
+
+.userlogin a:hover {
     color: #f10180;
 }
-.usercenter a:hover{
+
+.usercenter a:hover {
     color: #f10180;
 }
-.search-box{
+
+.search-box {
     height: 100px;
 }
-.search-title a{
+
+.search-title a {
     font-size: 34px;
     font-weight: 500;
     line-height: 90px;
     font-family: "微软雅黑";
     color: #f10180;
 }
-.search-logo{
+
+.search-logo {
     background-image: url(../img/headright.png);
     background-position: 0 0;
     width: 304px;
     height: 100px;
     margin-left: 50px;
 }
-.search-input{
+
+.search-input {
     float: right;
     width: 475px;
     height: 100px;
     position: relative;
 }
-.search-input input{
+
+.search-input input {
     display: block;
     width: 420px;
     height: 40px;
@@ -73,41 +86,48 @@
     border-color: #f10180;
     text-indent: 5px;
 }
-.search-input a{
+
+.search-input a {
     display: block;
     position: absolute;
     top: 26px;
     left: 418px;
 }
-.search-input a i{
+
+.search-input a i {
     display: block;
     width: 50px;
     height: 40px;
     background-image: url(../img/search.jpg);
     background-repeat: no-repeat;
 }
-.listbox{
+
+.listbox {
     width: 100%;
     height: 50px;
     border-bottom: #f10180 2px solid;
 }
-.lists{
+
+.lists {
     height: 50px;
 }
-.lists .list-btn{
+
+.lists .list-btn {
     background-color: #f10180;
     width: 156px;
     height: auto;
     margin-right: 20px;
 }
-.lists li{
+
+.lists li {
     float: left;
     position: relative;
     z-index: 8;
     height: 50px;
     line-height: 50px;
 }
-.list-btn a{
+
+.list-btn a {
     display: block;
     color: #fff;
     height: 50px;
@@ -119,12 +139,14 @@
     white-space: nowrap;
     position: relative;
 }
-.listall{
+
+.listall {
     position: absolute;
     top: 15px;
     left: 30px;
 }
-.hiddenlist{
+
+.hiddenlist {
     display: none;
     width: 156px;
     background-color: #f10180;
@@ -132,7 +154,8 @@
     top: 50px;
     left: 0;
 }
-.hiddenlist a{
+
+.hiddenlist a {
     display: block;
     height: 45px;
     line-height: 45px;
@@ -143,7 +166,8 @@
     color: #fff;
     box-sizing: border-box;
 }
-.list-link a{
+
+.list-link a {
     display: block;
     height: 50px;
     padding: 0 10px;
@@ -152,59 +176,72 @@
     white-space: nowrap;
     color: #333;
 }
-.list-link a:hover{
+
+.list-link a:hover {
     color: #f10180;
 }
-.linkone a{
+
+.linkone a {
     user-select: none;
     pointer-events: none;
     font-weight: 700;
     color: #f10180;
 }
-.bgimg{
+
+.bgimg {
     cursor: pointer;
     width: 100%;
     height: 360px;
     background: url(../img/bgimg.jpg) no-repeat 100%;
 }
-.carousel{
+
+.carousel {
     width: 100%;
     height: 360px;
 }
-.carousel-inner{
+
+.carousel-inner {
     height: 360px;
 }
-.carousel-inner img{
+
+.carousel-inner img {
     display: block;
     width: 100%;
     height: 360px !important;
 }
-.part1-title{
+
+.part1-title {
     margin-top: 50px;
     height: 70px;
 }
-.part img{
+
+.part img {
     display: block;
     width: 100%;
     height: 100%;
 }
-.shop{
+
+.shop {
     margin: 20px 0;
     background-color: #fff;
 }
-.shop:hover{
+
+.shop:hover {
     border: 1px silver solid;
 }
-.shop a{
+
+.shop a {
     width: 490px;
     height: 490px;
 }
-.shop a img{
+
+.shop a img {
     display: block;
     width: 100%;
     height: 100%;
 }
-.shop-title{
+
+.shop-title {
     margin-top: 18px;
     cursor: pointer;
     font-family: MicrosoftYaHei;
@@ -217,114 +254,138 @@
     width: 455px;
     display: block;
 }
-.otherinfo{
+
+.otherinfo {
     margin-top: 10px;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
 }
-.shop-price{
+
+.shop-price {
     display: block;
     font-weight: 500;
     font-size: 16px;
     color: #f10180;
-    padding:5px 0;
+    padding: 5px 0;
 }
-.count-info{
+
+.count-info {
     display: block;
     font-weight: 500;
     font-size: 16px;
     color: red;
     text-decoration: line-through;
 }
-.footer{
+
+.footer {
     padding: 20px 0;
 }
-.footer p{
+
+.footer p {
     text-align: center;
     color: #666;
 }
-@media screen and (max-width:768px){
-    .search-title{
+
+@media screen and (max-width:768px) {
+    .search-title {
         display: none;
     }
-    .search-box{
+
+    .search-box {
         position: relative;
     }
-    .search-input{
+
+    .search-input {
         position: absolute;
         left: 50%;
         top: 50%;
-        transform: translate(-50%,-50%);
+        transform: translate(-50%, -50%);
     }
 }
-@media screen and (max-width:1170px){
-    .lists li:nth-of-type(2n){
+
+@media screen and (max-width:1170px) {
+    .lists li:nth-of-type(2n) {
         display: none;
     }
 }
-@media screen and (max-width:580px){
-    .search-input{
-       width: 400px;
+
+@media screen and (max-width:580px) {
+    .search-input {
+        width: 400px;
     }
-    .search-input input{
+
+    .search-input input {
         width: 360px;
     }
-    .search-input a{
+
+    .search-input a {
         position: absolute;
         left: 358px;
     }
-    .usercenter{
+
+    .usercenter {
         display: none;
     }
-    .footer{
+
+    .footer {
         display: none;
     }
-    .listbox{
+
+    .listbox {
         display: none;
     }
-    .bgimg{
+
+    .bgimg {
         display: none;
     }
-    
+
 }
-.classify-title{
+
+.classify-title {
     width: 100%;
     height: 50px;
     background-color: #eaeaea;
     text-align: center;
     margin-top: 30px;
 }
-.classify-title span{
+
+.classify-title span {
     display: inline-block;
     color: #333;
     font-size: 30px;
     line-height: 50px;
 }
-.goods_details{
-   margin-top: 20px;
+
+.goods_details {
+    margin-top: 20px;
 }
+
 .theshop {
     width: 440px;
     float: left;
     margin-bottom: 40px;
     position: relative;
 }
+
 .theshop a {
     display: block;
     margin: 0 20px 10px 0;
 }
+
 .shopimg {
     position: relative;
     width: 418px;
     height: 418px;
 }
-.shopimg img{
+
+.shopimg img {
     display: block;
     width: 100%;
     height: 100%;
 }
-.anchor{
+
+.anchor {
     position: absolute;
     top: 0;
     left: 0;
@@ -334,7 +395,8 @@
     cursor: move;
     opacity: 0;
 }
-.bigbox{
+
+.bigbox {
     display: none;
     position: absolute;
     top: 0;
@@ -343,29 +405,35 @@
     height: 500px;
     overflow: hidden;
 }
-.bigbox img{
+
+.bigbox img {
     width: 1000px;
     height: 1000px;
     position: absolute;
     left: 0;
     top: 0;
 }
+
 .selectone {
     float: left;
     width: 88px;
     height: 88px;
 }
-.selectone img{
+
+.selectone img {
     display: block;
     width: 88px;
     height: 88px;
 }
+
 .details {
     float: left;
 }
+
 .shopdesc {
     margin: 0 10px;
 }
+
 .shopdesc h4 {
     font-size: 18px;
     font-weight: 700;
@@ -373,6 +441,7 @@
     font-family: "微软雅黑";
     margin: 10px 0;
 }
+
 .shopdesc label {
     height: 50px;
     line-height: 50px;
@@ -380,6 +449,7 @@
     color: #666;
     font-family: "微软雅黑";
 }
+
 .shopdesc span {
     font-size: 16px;
     color: #232323;
@@ -387,55 +457,67 @@
     font-family: "微软雅黑";
 
 }
-small{
+
+small {
     font-size: 14px;
 }
-.add{
+
+.add {
     cursor: pointer;
     color: #fff;
     background-color: #f10180 !important;
 }
-.reduce{
+
+.reduce {
     cursor: pointer;
     color: #fff;
     background-color: #f10180 !important;
 }
-.add:hover{
+
+.add:hover {
     color: #fff;
 }
-.reduce:hover{
+
+.reduce:hover {
     color: #fff;
 }
+
 .shopdetail {
     margin: 30px 10px;
     line-height: 50px;
 }
+
 .shopdetail div {
     float: left;
     width: 105px;
     text-align: justify;
-    
+
 }
+
 .shopdetail div>span {
     display: inline-block;
     padding-left: 100%;
 }
+
 .shopdetail span {
     float: left;
     font-size: 14px;
     color: #666;
     font-family: "微软雅黑";
 }
+
 .shopdetail label {
     font-size: 20px;
     color: #f10180;
     font-family: "微软雅黑";
 }
+
 .shopdetail_btn {
     width: 100px;
     height: 35px;
     margin-top: 10px;
 }
+
 .shopdetail_btn button {
     display: block;
     float: left;
@@ -446,6 +528,7 @@ small{
     border: 1px solid #dddddd;
     background-color: #f0f0f0;
 }
+
 .shopdetail_btn input {
     float: left;
     width: 40px;
@@ -457,6 +540,7 @@ small{
     border-right: none;
     text-align: center;
 }
+
 .buy {
     display: block;
     float: left;
@@ -470,11 +554,14 @@ small{
     border: 1px solid #f10180;
     border-radius: 1px;
     text-align: center;
+    cursor: pointer;
 }
-.buy:hover{
+
+.buy:hover {
     color: #f10180;
     background-color: #fff;
 }
+
 .addcart {
     display: block;
     float: left;
@@ -488,16 +575,73 @@ small{
     border-radius: 1px;
     text-align: center;
     margin-left: 40px;
+    cursor: pointer;
 }
-.addcart:hover{
+
+.addcart:hover {
     color: #fff;
     background-color: #f10180;
 }
-.footer{
+
+.footer {
     border-top: 2px solid #a1a1a1;
 }
-nav{
+
+nav {
     cursor: pointer;
     margin-left: 50%;
-    transform: translate(-50%,0);
+    transform: translate(-50%, 0);
+}
+.cart{
+    margin-top: 40px;
+}
+td,
+th {
+    line-height: 50px !important;
+    text-align: center;
+    width: 20%;
+}
+tbody td{
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+#mod {
+    display: none;
+}
+.cartbtn{
+   margin-left: 50%;
+   transform: translate(-50%,0);
+}
+th a{
+    color: #333333;
+    padding: 0 3px;
+}
+th a:hover{
+    color: #f10180;
+}
+.howmoney{
+    margin-top: 20px;
+}
+.total{
+    display: inline-block;
+    vertical-align: bottom;
+    color: #f10180;
+    font-size: 18px;
+    margin-top: 10px;
+}
+.totalval{
+    display: inline-block;
+    vertical-align: bottom;
+    color: #333;
+    font-size: 18px;
+    margin-right: 30px;
+    margin-top: 10px;
+}
+.howmoney button{
+    margin: 5px 5px;
+    outline: none;
+    border: none;
+    width: 100px;
+    background-color: #f10180 !important;
 }

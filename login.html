@@ -112,7 +112,6 @@
                 success: function (data) {
                     var resu = JSON.stringify(data);
                     localStorage.token = resu;
-                    console.log(localStorage.token);
                     $.get("http://192.168.1.103:3000/users/userinfo", {
                         username: uname.val(),
                         token: JSON.parse(localStorage.token).token
@@ -120,7 +119,6 @@
                         var username = item.userinfo.username;
                         var useremail = item.userinfo.email;
                         var userphone = item.userinfo.phone;
-                        console.log(username, useremail, userphone);
                         location.href = "index.html?username=" + username + "&email=" +
                             useremail + "&phone=" + userphone;
                     })

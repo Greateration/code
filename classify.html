@@ -152,7 +152,6 @@
                 userdata[item.split("=")[0]] = item.split("=")[1];
             })
         }
-        console.log(userdata);
         if (localStorage.token) {
             $(".login").html(userdata.username);
             $(".register").hide();

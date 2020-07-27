@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>cart page</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/index.css">
+    <script src="js/myjQuery.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+</head>
+
+<body>
+    <div class="header">
+        <div class="container">
+            <div class="welcome lf">
+                <a href="index.html">欢迎来到妮蔻商城！</a>
+            </div>
+            <div class="userlogin lf">
+                <a href="login.html" class="login">请登录</a>
+                <a href="register.html" class="register">免费注册</a>
+                <a href="#" class="exit" style="display: none;">退出登录</a>
+            </div>
+            <div class="usercenter rt">
+                <a href="#">我的妮蔻</a>
+                <a href="cart.html">购物车</a>
+                <a href="#">收藏</a>
+                <a href="#">帮助中心</a>
+            </div>
+        </div>
+    </div>
+    <div class="wrap">
+        <div class="search-box container">
+            <div class="search-title lf">
+                <a href="index.html">妮蔻商城</a>
+            </div>
+            <div class="search-logo lf visible-lg">
+            </div>
+            <div class="search-input">
+                <input type="text" placeholder="请输入关键字">
+                <a href="#"><i></i></a>
+            </div>
+        </div>
+        <div class="listbox">
+            <div class="container">
+                <ul class="lists">
+                    <li class="list-btn">
+                        <a href="#">
+                            <img src="img/nav.png" class="listall"> 商品分类
+                        </a>
+                        <div class="hiddenlist">
+                            <a href="#">抢购/促销/特卖</a>
+                            <a href="#">男装/男士/商务</a>
+                            <a href="#">女装/时尚/化妆品</a>
+                            <a href="#">奢侈品/数码</a>
+                            <a href="#">生活用品/居家常用</a>
+                            <a href="#">运动/装备</a>
+                            <a href="#">休闲娱乐</a>
+                            <a href="#">家用电器</a>
+                            <a href="#">户外健身</a>
+                        </div>
+                    </li>
+                    <li class="list-link linkone">
+                        <a href="index.html">首页</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="cart container">
+            <table class="table table-striped table-bordered table-hover table-condensed">
+                <thead>
+                    <tr>
+                        <th class="carlist"><a>全选</a>|<a>全不选</a></th>
+                        <th>商品名称</th>
+                        <th>数量</th>
+                        <th>价格</th>
+                        <th>小计</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                </tbody>
+            </table>
+            <div class="howmoney">
+                <button type="button" class="btn btn-success rt">结算</button>
+                <span class="totalval rt">120</span><span class="total rt">合计：</span>
+            </div>
+        </div>
+    </div>
+    <div class="footer">
+        <div class="container">
+            <p>
+                Copyright 2008-2020 niko.com，All Rights Reserved ICP证：淦 B5-14283378
+            </p>
+        </div>
+    </div>
+</body>
+<script>
+    $(function () {
+        var url = location.search;
+        var userdata = {};
+        if (url.indexOf("?") != -1) {
+            var str = url.substr(1);
+            var arr = str.split("&");
+            arr.forEach(function (item, index) {
+                userdata[item.split("=")[0]] = item.split("=")[1];
+            })
+        }
+        if (localStorage.token) {
+            $(".login").html(userdata.username);
+            $(".register").hide();
+            $(".exit").show();
+            $(".exit").click(function () {
+                $(this).hide();
+                $(".login").html("请登录");
+                $(".register").show();
+                localStorage.clear(); //清空本地数据
+            })
+        }
+        $.ajax({
+            url: "http://localhost/w/website/findGoodsTypeList",
+            success: function (resu) {
+                resu.data.forEach(function (item, index) {
+                    $(".lists").append(
+                        `<li class="list-link"><a href="#">${item.name}</a></li>`);
+                })
+                $(".lists a").click(function () {
+                    if (userdata.username) {
+                        location.href = "classify.html?shopname=" + encodeURIComponent($(
+                                this)
+                            .text()) + "&username=" + encodeURIComponent(userdata
+                            .username);
+                    } else {
+                        location.href = "classify.html?shopname=" + encodeURIComponent($(
+                                this)
+                            .text());
+                    }
+
+                })
+                // 点击某分类 分类页显示该分类点亮
+                for (i = 0; i < $(".list-link a").length; i++) {
+                    if ($(".list-link a")[i].innerText == decodeURIComponent(userdata.shopname)) {
+                        $(".list-link a")[i].style.color = "#f10180";
+                    }
+                }
+                //点击某分类 分类页显示该分类的标题
+                $(".goodsname").html(decodeURIComponent(userdata.shopname));
+            }
+
+        })
+        var shopslist = JSON.parse(localStorage.gifts);
+        shopslist.forEach(function (item, index) {
+            $("tbody").append(`<tr>
+                        <td><input type="checkbox" name="chkpro" value="1" /></td>
+                        <td>${item.shopname}</td>
+                        <td>
+                            <div class="shopdetail_btn cartbtn">
+                                <button class="reduce">-</button>
+                                <input type="text" value="${item.num}">
+                                <button class="add">+</button>
+                            </div>
+                        </td>
+                        <td>${item.shopprice}</td>
+                        <td class="smalleval">${item.shopprice * item.num}</td>
+                        <td>
+                            <button class="btn btn-info">支付</button>
+                            <button class="btn btn-danger deletebtn">删除</button>
+                        </td>
+                    </tr>`);
+        })
+
+        $("th a").css("cursor", "pointer");
+        // 全选全不选
+        $("th a").click(function () {
+            var isChecked = false;
+            if ($(this).html() == "全选") {
+                isChecked = true;
+            }
+            var chks = $("input[name='chkpro']");
+            for (var i = 0; i < chks.length; i++) {
+                var prochk = chks[i];
+                prochk.checked = isChecked;
+            }
+        });
+        $(".add").click(function () {
+            var num = $(this).prev().val();
+            num++;
+            $(this).prev().val(num);
+            var str = $(".smalleval").text();
+            var resa = (parseFloat(str) + parseFloat($(this).parent().parent().next().text()))
+                .toFixed(2);
+            $(".smalleval").text(resa);
+            for (var i = 0; i < $(".smalleval").length; i++) {
+                var total = 0;
+                total = total + parseFloat($(".smalleval")[i].innerText);
+            }
+            $(".totalval").html(total);
+        })
+        $(".cartbtn input").blur(function () {
+            if ($(this).val() < 0) {
+                alert("请输入大于0的数字");
+                $(this).val(0);
+            }
+            var thisnum = $(this).val();
+            var resthis = parseFloat($(this).parent().parent().next().text()) * thisnum;
+            $(".smalleval").text(resthis);
+            for (var i = 0; i < $(".smalleval").length; i++) {
+                var total = 0;
+                total = total + parseFloat($(".smalleval")[i].innerText);
+            }
+            $(".totalval").html(total);
+        })
+        $(".reduce").click(function () {
+            var num2 = $(this).next().val();
+            num2--;
+            if (num2 == 0) {
+                $(this).prop("disabled", true)
+            }
+            $(this).next().val(num2);
+            var str2 = $(".smalleval").text();
+            var resd = (parseFloat(str2) - parseFloat($(this).parent().parent().next().text()))
+                .toFixed(2);
+            $(".smalleval").text(resd);
+            for (var i = 0; i < $(".smalleval").length; i++) {
+                var total = 0;
+                total = total + parseFloat($(".smalleval")[i].innerText);
+            }
+            $(".totalval").html(total);
+        })
+        for (var i = 0; i < $(".smalleval").length; i++) {
+            var total = 0;
+            total = total + parseFloat($(".smalleval")[i].innerText);
+        }
+        $(".totalval").html(total);
+        $(".list-btn").mouseenter(function () {
+            $(".hiddenlist").stop().fadeIn();
+        })
+        $(".list-btn").mouseleave(function () {
+            $(".hiddenlist").stop().fadeOut();
+        })
+        $(".hiddenlist").children().mouseenter(function () {
+            $(this).css({
+                "backgroundColor": "#fff",
+                "color": "#f10180"
+            });
+        })
+        $(".hiddenlist").children().mouseleave(function () {
+            $(this).css({
+                "backgroundColor": "#f10180",
+                "color": "#fff"
+            });
+        })
+        $(".deletebtn").click(function () {
+            $(this).parent().parent().remove();
+        })
+    })
+</script>
+
+</html>

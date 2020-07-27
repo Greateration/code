@@ -25,7 +25,7 @@
             </div>
             <div class="usercenter rt">
                 <a href="#">我的妮蔻</a>
-                <a href="#">购物车</a>
+                <a href="cart.html">购物车</a>
                 <a href="#">收藏</a>
                 <a href="#">帮助中心</a>
             </div>
@@ -77,6 +77,102 @@
             <p>
                 Copyright 2008-2020 niko.com，All Rights Reserved ICP证：淦 B5-14283378
             </p>
+        </div>
+    </div>
+    <!-- 模态框登录 -->
+    <div id="loginModal" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <button class="close" data-dismiss="modal">
+                        <span>&times;</span>
+                    </button>
+                </div>
+                <div class="modal-title">
+                    <h1 class="text-center">登录</h1>
+                </div>
+                <div class="modal-body">
+                    <form class="form-group" action="">
+                        <div class="form-group">
+                            <label for="">用户名</label>
+                            <input class="form-control" type="text" placeholder="">
+                        </div>
+                        <div class="form-group">
+                            <label for="">密码</label>
+                            <input class="form-control" type="password" placeholder="">
+                        </div>
+                        <div class="text-right">
+                            <button class="btn btn-primary modallogin" type="submit">登录</button>
+                            <button class="btn btn-danger" data-dismiss="modal">取消</button>
+                        </div>
+                        <a href="" class="toreg" data-toggle="modal" data-dismiss="modal"
+                            data-target="#registerModal">还没有账号？点我注册</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 模态框注册 -->
+    <div id="registerModal" class="modal fade" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <button class="close" data-dismiss="modal">
+                        <span>&times;</span>
+                    </button>
+                </div>
+                <div class="modal-title">
+                    <h1 class="text-center">注册</h1>
+                </div>
+                <div class="modal-body">
+                    <form class="form-group" action="">
+                        <div class="form-group">
+                            <label for="">用户名</label>
+                            <input class="form-control" type="text" placeholder="6-15位字母或数字">
+                        </div>
+                        <div class="form-group">
+                            <label for="">密码</label>
+                            <input class="form-control" type="password" placeholder="至少6位字母或数字">
+                        </div>
+                        <div class="form-group">
+                            <label for="">再次输入密码</label>
+                            <input class="form-control" type="password" placeholder="至少6位字母或数字">
+                        </div>
+                        <div class="form-group">
+                            <label for="">邮箱</label>
+                            <input class="form-control" type="email" placeholder="例如:123@123.com">
+                        </div>
+                        <div class="text-right">
+                            <button class="btn btn-primary" type="submit">提交</button>
+                            <button class="btn btn-danger" data-dismiss="modal">取消</button>
+                        </div>
+                        <a href="" data-toggle="modal" data-dismiss="modal" data-target="#loginModal">已有账号？点我登录</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 加入购物车 -->
+    <div id="addModal" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <button class="close" data-dismiss="modal">
+                        <span>&times;</span>
+                    </button>
+                </div>
+                <div class="modal-title">
+                    <h1 class="text-center">已经加入购物车🛒</h1>
+                </div>
+                <div class="modal-body">
+                    <form class="form-group" action="">
+                        <div class="text-center">
+                            <button class="btn btn-primary modallogin" data-dismiss="modal">继续购物</button>
+                            <button class="btn btn-danger entercart" data-dismiss="modal">进入购物车</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
     </div>
 </body>
@@ -174,8 +270,10 @@
                             <button class="add">+</button>
                         </div>
                     </div>
-                    <a href="#" class="buy">立即购买</a>
-                    <a href="#" class="addcart">加入购物车</a>
+                    <a class="buy" data-toggle="modal"
+                            data-target="#loginModal">立即购买</a>
+                    <a class="addcart" data-toggle="modal"
+                            data-target="#loginModal">加入购物车</a>
                 </div>`);
                 $(".selectone img").mouseenter(function () {
                     $(this).css("border", "1px solid #f10180");
@@ -195,24 +293,82 @@
                 })
                 // 放大镜
                 var largelook = new MakeLarger();
-                $(".add").click(function(){
+                $(".add").click(function () {
                     var num = $(this).prev().val();
                     num++;
                     $(this).prev().val(num);
                     var str = $(".dzprice").text().substr(1);
-                    var resa = (parseFloat(str) + parseFloat(arr[0].zk_final_price)).toFixed(2);
+                    var resa = (parseFloat(str) + parseFloat(arr[0].zk_final_price))
+                        .toFixed(2);
                     $(".dzprice").text("￥" + resa);
                 })
-                $(".reduce").click(function(){
+                $(".reduce").click(function () {
                     var num2 = $(this).next().val();
                     num2--;
-                    if(num2 == 0){
-                        $(this).prop("disabled",true)
+                    if (num2 == 0) {
+                        $(this).prop("disabled", true)
                     }
                     $(this).next().val(num2);
                     var str2 = $(".dzprice").text().substr(1);
-                    var resd = (parseFloat(str2) - parseFloat(arr[0].zk_final_price)).toFixed(2);
+                    var resd = (parseFloat(str2) - parseFloat(arr[0].zk_final_price))
+                        .toFixed(2);
                     $(".dzprice").text("￥" + resd);
+                })
+                $(".shopdetail input").blur(function () {
+                    if ($(this).val() < 0) {
+                        alert("请输入大于0的数字");
+                        $(this).val(0);
+                    }
+                    var thisnum = $(this).val();
+                    var resthis = parseFloat(arr[0].zk_final_price) * thisnum;
+                    $(".dzprice").text("￥" + resthis);
+                })
+                // $(".buy").click(function () {
+                //     // 判断用户登录
+                //     if (userdata.username) {
+
+                //     } else {
+                //         //未登录触发模态框登录
+                //         ajaxlogin();
+                //     }
+                // })
+                $(".addcart").click(function () {
+                    // 判断用户登录
+                    if (localStorage.token) {
+                        $(this).attr("data-target", "#addModal");
+                        // 加购物车
+                        var k =
+                            0; // 定义一个参数，用在循环中计算是否有这个商品id，如果没有，就把商品添加到gifts中，如果有，那这个商品的num增加
+                        var gift = {
+                            id: userdata.id,
+                            shopprice: arr[0].zk_final_price,
+                            shopnum: $(".shopdetail input").val(),
+                            shopname: arr[0].title,
+                            num: 1
+                        };
+                        var gifts = localStorage.getItem("gifts") ?
+                            JSON.parse(localStorage.getItem("gifts")) : [];
+                        for (var i = 0; i < gifts.length; i++) {
+                            var item = gifts[i];
+                            if (item.id === gift.id) {
+                                item.num += gift.num;
+                            } else {
+                                k = k + 1;
+                            }
+                        }
+                        if (k === gifts.length) {
+                            gifts.push(gift);
+                        }
+
+                        localStorage.setItem("gifts", JSON.stringify(gifts));
+                    } else {
+                        $(this).attr("data-target", "#loginModal");
+                        //未登录触发模态框登录
+                        ajaxlogin();
+                    }
+                })
+                $(".entercart").click(function(){
+                    location.href = "cart.html";
                 })
             }
 
@@ -236,6 +392,40 @@
             });
         })
     })
+    //模态框登录方法
+    function ajaxlogin() {
+        $("modallogin").click(function () {
+            var namestr = $("input[name=uname]").val();
+            var passstr = $("input[name=upass]").val();
+            console.log(namestr);
+            //使用ajax提交方法
+            //$.post("请求的路径",{json参数},匿名的回调函数function(resuobj){});
+            $.post("http://192.168.1.103:3000/users/login", {
+                username: namestr,
+                userpass: passstr
+            }, function (resuobj) {
+                //回调函数 
+                var jsonobj = JSON.stringify(resuobj);
+                localStorage.token = jsonobj;
+                // if (jsonobj.status == 0) {
+                //     var loginUser = jsonobj.username;
+                //     $(".login").html(loginUser);
+                //     $(".register").hide();
+                //     $(".exit").show();
+                //     $(".exit").click(function () {
+                //         $(this).hide();
+                //         $(".login").html("请登录");
+                //         $(".register").show();
+                //         localStorage.clear(); //清空本地数据
+                //     })
+                //     $('#updateModal').modal('hide');
+                // } else {
+
+                // }
+            });
+        })
+
+    }
     //放大镜构造方法
     function MakeLarger() {
         //获取属性

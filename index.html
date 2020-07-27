@@ -197,12 +197,22 @@
                 var arr = resu.data.tbk_dg_material_optional_response.result_list.map_data;
                 arr.forEach(function (item, index) {
                     $("#shops").append(
-                        `<div class="shop col-md-3"><a href="#"><img src="${item.pict_url}"><div class="shopinfo"><span class="shop-title">${item.short_title}</span><div class="otherinfo"><span class="shop-price">现价：${item.reserve_price}元</span><span class="count-info">${item.coupon_info}</span></div></div></a></div>`
+                        `<div class="shop col-md-3"><a><img src="${item.pict_url}"><div class="shopinfo"><span class="shop-title">${item.short_title}</span><div class="otherinfo"><span class="shop-price">现价：${item.reserve_price}元</span><span class="count-info">${item.coupon_info}</span></div></div></a></div>`
                     );
+                    $(".shop").click(function () {
+                        if (userdata.username) {
+                            location.href = "shopinfo.html?id=" + item.item_id +
+                                "&username=" + encodeURIComponent(userdata
+                                    .username);
+                        } else {
+                            location.href = "shopinfo.html?id=" + item.item_id;
+                        }
+
+                    })
                 })
+
             }
         })
-
     })
 </script>
 
